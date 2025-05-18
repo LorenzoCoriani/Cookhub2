@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/baseline_add_home_24"
+        android:title="@string/home"/>
+
+        <item
+            android:id="@+id/profileFragment"
+            android:icon="@drawable/baseline_emoji_people_24"
+            android:title="@string/profilo"/>
+
+        <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/baseline_settings_24"
+            android:title="@string/impostazioni"/>
+
+        <item
+            android:id="@+id/easterEggFragment"
+            android:icon="@drawable/ai_generated_image_banana"
+            android:title="@string/egg"/>
+    </menu>

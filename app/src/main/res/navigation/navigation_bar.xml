@@ -1,0 +1,41 @@
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bar"
+    app:startDestination="@id/home2">
+
+    <fragment
+        android:id="@+id/home2"
+        android:name="coriani.lorenzo.cookhub.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="coriani.lorenzo.cookhub.RecipeDetailFragment"
+        android:label="Recipe Details"
+        tools:layout="@layout/fragment_recipe_detail" />
+
+    <fragment
+        android:id="@+id/easteregg"
+        android:name="coriani.lorenzo.cookhub.easteregg"
+        android:label="fragment_easteregg"
+        tools:layout="@layout/fragment_easteregg" />
+    <fragment
+        android:id="@+id/profilo"
+        android:name="coriani.lorenzo.cookhub.profilo"
+        android:label="fragment_profilo"
+        tools:layout="@layout/fragment_profilo" />
+    <fragment
+        android:id="@+id/impostazioni"
+        android:name="coriani.lorenzo.cookhub.impostazioni"
+        android:label="fragment_impostazioni"
+        tools:layout="@layout/fragment_impostazioni" />
+</navigation>
+
+</navigation>
