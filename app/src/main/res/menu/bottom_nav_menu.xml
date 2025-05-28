@@ -20,6 +20,6 @@
 
         <item
             android:id="@+id/easterEggFragment"
-            android:icon="@drawable/ai_generated_image_banana"
+            android:icon="@drawable/baseline_settings_24"
             android:title="@string/egg"/>
     </menu>

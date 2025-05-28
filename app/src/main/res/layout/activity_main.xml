@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,30 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Contenitore per i fragment -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
+            android:queryHint="Cerca ricetta" />
+
+        <ImageView
+            android:id="@+id/image_profilo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@string/persona"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_persona"/>
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_nav"/>
+        android:layout_height="0dp"
+        android:layout_below="@id/top_bar"
+        android:layout_gravity="top"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="56dp"
+        android:layout_weight="1" />
 
-    <!-- Barra di ricerca (sopra il contenuto, ma sotto il BottomNavigationView) -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@android:color/white"
-        android:iconifiedByDefault="false"
-        android:queryHint="Cerca ricetta..." />
-
-    <!-- Menu in basso -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        app:labelVisibilityMode="labeled"
+        tools:ignore="VisualLintBottomNav" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

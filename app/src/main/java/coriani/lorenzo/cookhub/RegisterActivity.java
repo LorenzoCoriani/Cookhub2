@@ -34,14 +34,12 @@ public class RegisterActivity extends AppCompatActivity {
         String emailText = email.getText().toString().trim();
         String passwordText = password.getText().toString().trim();
 
-        String url = "https://tuo-dominio.com/api/register"; // da cambiare
+        String url = "https://thecookshub.org/pages/index.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             Toast.makeText(this, "Registrazione completata", Toast.LENGTH_SHORT).show();
             finish();
-        }, error -> {
-            Toast.makeText(this, "Errore registrazione", Toast.LENGTH_SHORT).show();
-        }) {
+        }, error -> Toast.makeText(this, "Errore registrazione", Toast.LENGTH_SHORT).show()) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

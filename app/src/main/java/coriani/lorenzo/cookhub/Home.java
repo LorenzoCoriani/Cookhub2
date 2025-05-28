@@ -1,5 +1,9 @@
 package coriani.lorenzo.cookhub;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,27 +27,17 @@ import java.util.List;
 
 public class Home extends Fragment {
 
-    private RecyclerView recyclerView;
     private RicettaAdapter adapter;
     private List<Ricetta> listaRicette;
 
     public Home() {}
-
-    public static Home newInstance(String param1, String param2) {
-        Home fragment = new Home();
-        Bundle args = new Bundle();
-        args.putString("param1", param1);
-        args.putString("param2", param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         listaRicette = new ArrayList<>();
@@ -55,22 +50,39 @@ public class Home extends Fragment {
     }
 
     private void caricaRicette() {
-        String url = "https://tuo-dominio.com/api/ricette"; // <-- CAMBIA URL QUI
+        Activity activity = getActivity();
+        if (activity == null || !isAdded()) {
+            Toast.makeText(getContext(), "Errore: Fragment non attaccato", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //uso requireActivity() al posto di requireContext() perchè potrebbe essere null
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("user", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("user_id", -1);
+
+        if (userId == -1) {
+            Toast.makeText(getContext(), "Utente non loggato", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String url = "https://thecookshub.org/pages/index.php?user_id=" + userId;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                response -> {
-                    parseRicette(response);
-                },
+                this::parseRicette,
                 error -> {
-                    Toast.makeText(getContext(), "Errore nel caricamento", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                    Toast.makeText(getContext(), "Errore nel caricamento: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 });
 
-        Volley.newRequestQueue(requireContext()).add(request);
+        Volley.newRequestQueue(activity).add(request);
     }
 
-    private void parseRicette(Object response) {
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void parseRicette(JSONArray response) {
+        listaRicette.clear(); // Importante: svuota prima la lista
         try {
-            for (int i = 0; i < response(); i++) {
+            for (int i = 0; i < response.length(); i++){
                 JSONObject obj = response.getJSONObject(i);
                 String titolo = obj.getString("titolo");
                 String descrizione = obj.getString("descrizione");

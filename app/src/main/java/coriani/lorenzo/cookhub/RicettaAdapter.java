@@ -1,7 +1,6 @@
 package coriani.lorenzo.cookhub;
 
 import android.content.Context;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import java.util.List;
 
 public class RicettaAdapter extends RecyclerView.Adapter<RicettaAdapter.ViewHolder> {
 
-    private List<Ricetta> ricettaList;
-    private Context context;
+    private final List<Ricetta> ricettaList;
+    private final Context context;
 
     // Costruttore
     public RicettaAdapter(Context context, List<Ricetta> ricettaList) {
@@ -38,8 +37,9 @@ public class RicettaAdapter extends RecyclerView.Adapter<RicettaAdapter.ViewHold
         }
     }
 
+    @NonNull
     @Override
-    public RicettaAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RicettaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_ricetta, parent, false);
         return new ViewHolder(view);
     }
@@ -50,7 +50,7 @@ public class RicettaAdapter extends RecyclerView.Adapter<RicettaAdapter.ViewHold
 
         holder.titoloTextView.setText(ricetta.getTitolo());
         holder.descrizioneTextView.setText(ricetta.getDescrizione());
-        holder.immagineImageView.setImageResource(ricetta.getIdImmagine());
+        holder.immagineImageView.setImageResource(Integer.parseInt(ricetta.getImmagineUrl()));
     }
 
     @Override

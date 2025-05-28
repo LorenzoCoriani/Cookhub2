@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="wrap_content"
@@ -15,8 +16,10 @@
             android:id="@+id/image_ricetta"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:importantForAccessibility="no"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
             android:id="@+id/text_titolo"
@@ -25,7 +28,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Titolo Ricetta" />
+            android:text="@string/titolo_ricetta" />
 
         <TextView
             android:id="@+id/text_descrizione"
@@ -33,7 +36,7 @@
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descrizione breve della ricetta..." />
+            android:text="@string/descrizione_breve_della_ricetta" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

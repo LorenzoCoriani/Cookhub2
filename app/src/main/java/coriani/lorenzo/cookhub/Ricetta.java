@@ -1,8 +1,8 @@
 package coriani.lorenzo.cookhub;
 public class Ricetta {
-    private String titolo;
-    private String descrizione;
-    private String immagineUrl;
+    private final String titolo;
+    private final String descrizione;
+    private final String immagineUrl;
 
     public Ricetta(String titolo, String descrizione, String immagineUrl) {
         this.titolo = titolo;
@@ -22,3 +22,5 @@ public class Ricetta {
         return immagineUrl;
     }
 }
+
+
