@@ -11,8 +11,16 @@
     <string name="registrati">Registrati</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="descrizione_breve_della_ricetta">Descrizione breve della ricetta...</string>
+    <string name="descrizione_breve_della_ricetta">Descrizione breve della ricetta</string>
     <string name="titolo_ricetta">Titolo Ricetta</string>
     <string name="register">Register</string>
+    <string name="aspetto">Aspetto</string>
+    <string name="tema_scuro">Tema scuro</string>
+    <string name="notifiche">Notifiche</string>
+    <string name="abilita_notifiche">Abilita notifiche</string>
+    <string name="profile_image_desc">Immagine profilo</string>
+    <string name="bio_label">Biografia</string>
+    <string name="bio_hint">Scrivi qualcosa su di te</string>
+    <string name="save_button">Salva</string>
 
 </resources>

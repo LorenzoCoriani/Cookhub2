@@ -80,7 +80,7 @@ public class Home extends Fragment {
 
     @SuppressLint("NotifyDataSetChanged")
     private void parseRicette(JSONArray response) {
-        listaRicette.clear(); // Importante: svuota prima la lista
+        listaRicette.clear();
         try {
             for (int i = 0; i < response.length(); i++){
                 JSONObject obj = response.getJSONObject(i);

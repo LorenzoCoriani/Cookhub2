@@ -39,10 +39,10 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation("com.android.volley:volley:1.2.1")
-    implementation ("com.google.android.material:material:1.10.0");
-    implementation ("com.github.bumptech.glide:glide:4.15.1");
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1");
+    implementation(libs.volley)
+    implementation (libs.material)
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
