@@ -34,12 +34,30 @@ public class RegisterActivity extends AppCompatActivity {
         String emailText = email.getText().toString().trim();
         String passwordText = password.getText().toString().trim();
 
+        if (emailText.isEmpty() || passwordText.isEmpty()) {
+            Toast.makeText(this, "Inserisci email e password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String url = "https://thecookshub.org/pages/index.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
-            Toast.makeText(this, "Registrazione completata", Toast.LENGTH_SHORT).show();
-            finish();
-        }, error -> Toast.makeText(this, "Errore registrazione", Toast.LENGTH_SHORT).show()) {
+            // Mostra la risposta del server per capire cosa succede
+            Toast.makeText(this, "Risposta server: " + response, Toast.LENGTH_LONG).show();
+
+            // Esempio: puoi gestire risposta "success" o "error"
+            if (response.toLowerCase().contains("success")) {
+                Toast.makeText(this, "Registrazione completata", Toast.LENGTH_SHORT).show();
+                finish(); // chiude l'activity
+            } else {
+                Toast.makeText(this, "Errore durante la registrazione", Toast.LENGTH_SHORT).show();
+            }
+
+        }, error -> {
+            // Mostra errore di rete
+            error.printStackTrace(); // log completo
+            Toast.makeText(this, "Errore rete: " + error.getMessage(), Toast.LENGTH_LONG).show();
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

@@ -6,59 +6,79 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        //Collega la bottom navigation al sistema di navigazione definito con navigation_bar
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
-        NavController navController = Navigation.findNavController(this, R.id.navigation_bar);
-        NavigationUI.setupWithNavController(bottomNav, navController);
 
-        //Quando clicchi sull'immagine del profilo, viene eseguito
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+
+        // Carica il fragment iniziale
+        loadFragment(new Home());
+
+        // Gestione click bottom navigation
+        bottomNav.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int id = item.getItemId();
+
+            if (id == R.id.homeFragment) {
+                selectedFragment = new Home();
+            } else if (id == R.id.profileFragment) {
+                selectedFragment = new profilo();
+            } else if (id == R.id.settingsFragment) {
+                selectedFragment = new impostazioni();
+            } else if (id == R.id.easterEggFragment) {
+                selectedFragment = new easteregg();
+            }
+
+            if (selectedFragment != null) {
+                loadFragment(selectedFragment);
+                return true;
+            }
+            return false;
+        });
+
+        // Gestione Click immagine profilo
         ImageView imageProfilo = findViewById(R.id.image_profilo);
         imageProfilo.setOnClickListener(v -> showDialog());
-
     }
 
-        //converte la pagina xml dialog in oggetti view
-            private void showDialog() {
-            View dialogView = getLayoutInflater().inflate(R.layout.dialog, null);
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+    }
 
-            //Crea un dialog con quel layout
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setView(dialogView)
-                    .setTitle("Benvenuto")
-                    .create();
+    private void showDialog() {
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog, null);
 
-            Button btnLogin = dialogView.findViewById(R.id.btnLogin);
-            Button btnRegister = dialogView.findViewById(R.id.btnRegister);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setTitle("Benvenuto")
+                .create();
 
-            //Se clicchi Login, il dialog si chiude e parte LoginActivity
-            btnLogin.setOnClickListener(v -> {
-                dialog.dismiss();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            });
-            //Se clicchi Register, parte RegisterActivity
-            btnRegister.setOnClickListener(v -> {
-                dialog.dismiss();
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-            });
+        Button btnLogin = dialogView.findViewById(R.id.btnLogin);
+        Button btnRegister = dialogView.findViewById(R.id.btnRegister);
 
-            dialog.show();
+        btnLogin.setOnClickListener(v -> {
+            dialog.dismiss();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        });
+
+        btnRegister.setOnClickListener(v -> {
+            dialog.dismiss();
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+        });
+
+        dialog.show();
     }
 }

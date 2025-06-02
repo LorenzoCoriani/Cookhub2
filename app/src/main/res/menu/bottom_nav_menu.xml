@@ -2,7 +2,7 @@
 
     <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/baseline_add_home_24"
@@ -20,6 +20,6 @@
 
         <item
             android:id="@+id/easterEggFragment"
-            android:icon="@drawable/baseline_settings_24"
+            android:icon="@drawable/baseline_egg_24"
             android:title="@string/egg"/>
     </menu>
